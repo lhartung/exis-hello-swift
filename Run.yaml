@@ -1,2 +1,2 @@
 Base: exis-swift
-Command: swift main.swift
+Command: main
