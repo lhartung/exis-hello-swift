@@ -1,22 +1,14 @@
 import riffle
 
-let domain = riffle.Domain(name: "xs.test")
-
-class DemoApp: riffle.RiffleDelegate {
-    init() {
-        print("Initializing...")
-    }
-
-    func onJoin() {
-        domain.register("hello#details") { (args: Any) -> Any? in
+class DemoBackend: riffle.Domain, riffle.Delegate {
+    override func onJoin() {
+        register("hello") { (args: Any) -> Any? in
             print("Received call!")
             return "Hello!"
         }
     }
-
-    func onLeave() {}
 }
 
-let delegate = DemoApp()
-domain.delegate = delegate
-domain.join()
+let backend = DemoBackend(name: "xs.test")
+backend.delegate = backend
+backend.join()
